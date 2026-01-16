@@ -1,0 +1,1 @@
+a system with a web application with a small api and a queue component and a db. it should   allow agents to post a 'breakpoint' - where a human can post feedback and release the breakpoint (and view all waiting breakpoints). and the agent call poll the api until the breakpoint was released.
