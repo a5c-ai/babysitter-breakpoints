@@ -10,7 +10,32 @@ function defaultDbPath() {
   return path.join(home, ".a5c", "breakpoints", "db", "breakpoints.db");
 }
 
-const DB_PATH = process.env.DB_PATH || defaultDbPath();
+function expandHome(value) {
+  if (!value) return value;
+  if (value === "~") return os.homedir();
+  if (value.startsWith(`~${path.sep}`)) {
+    return path.join(os.homedir(), value.slice(2));
+  }
+  if (value.startsWith("~/")) {
+    return path.join(os.homedir(), value.slice(2));
+  }
+  return value;
+}
+
+function resolveDbPath(value) {
+  const expanded = expandHome(value);
+  if (!expanded) return expanded;
+  const normalized = path.normalize(expanded);
+  if (normalized.endsWith(path.sep)) {
+    return path.join(normalized, "breakpoints.db");
+  }
+  if (!path.extname(normalized)) {
+    return path.join(normalized, "breakpoints.db");
+  }
+  return normalized;
+}
+
+const DB_PATH = resolveDbPath(process.env.DB_PATH || defaultDbPath());
 
 function openDb() {
   fs.mkdirSync(path.dirname(DB_PATH), { recursive: true });

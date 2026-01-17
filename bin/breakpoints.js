@@ -30,7 +30,7 @@ function runCommand(command, args, options = {}) {
 }
 
 function apiBase() {
-  return process.env.BREAKPOINT_API_URL || "http://localhost:3000";
+  return process.env.BREAKPOINT_API_URL || "http://localhost:3185";
 }
 
 async function httpJson(method, url, body) {
@@ -164,6 +164,7 @@ function runSystem() {
       ),
     PORT: process.env.PORT || "3185",
     WEB_PORT: process.env.WEB_PORT || "3184",
+    REPO_ROOT: process.env.REPO_ROOT || process.cwd(),
   };
   runCommand("node", [runner], { cwd: repoRoot, env });
 }

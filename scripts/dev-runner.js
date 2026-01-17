@@ -16,6 +16,7 @@ const defaultEnv = {
     ),
   PORT: process.env.PORT || "3185",
   WEB_PORT: process.env.WEB_PORT || "3184",
+  REPO_ROOT: process.env.REPO_ROOT || process.cwd(),
 };
 
 function run(label, command, args) {

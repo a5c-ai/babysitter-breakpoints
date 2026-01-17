@@ -9,8 +9,11 @@
   "files": [
     "bin/",
     "api/",
+    "db/",
     "worker/",
     "extensions/",
+    "scripts/",
+    "web/",
     ".codex/skills/babysitter-breakpoint/"
   ],
   "scripts": {

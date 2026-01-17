@@ -75,6 +75,12 @@ function authHeaders() {
   return { Authorization: `Bearer ${token}` };
 }
 
+function apiBase() {
+  if (window.API_BASE) return window.API_BASE;
+  const host = window.location.hostname || "localhost";
+  return `http://${host}:3185`;
+}
+
 function setMessage(text) {
   listMessage.textContent = text || "";
 }
@@ -97,7 +103,8 @@ function updateNotifyStatus() {
 }
 
 async function fetchJson(url, options = {}) {
-  const res = await fetch(url, {
+  const target = url.startsWith("http") ? url : `${apiBase()}${url}`;
+  const res = await fetch(target, {
     ...options,
     headers: {
       "Content-Type": "application/json",
@@ -192,7 +199,7 @@ async function loadContextFile(file) {
     const res = await fetchJson(
       `/api/breakpoints/${currentId}/context?path=${encodeURIComponent(file.path)}`
     );
-    contextMeta.textContent = `${res.path} · ${res.format} · ${res.language}`;
+    contextMeta.textContent = `${res.path} | ${res.format} | ${res.language}`;
     if (res.format === "markdown") {
       contextRender.innerHTML = window.marked.parse(res.content || "");
       contextCode.classList.add("hidden");

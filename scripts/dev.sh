@@ -5,6 +5,6 @@ echo "Starting API and worker..."
 node api/server.js &
 node worker/worker.js &
 
-echo "API: http://localhost:3000"
+echo "API: http://localhost:3185"
 echo "Press Ctrl+C to stop."
 wait

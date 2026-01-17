@@ -25,7 +25,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
       - name: Bump version
-        run: 'npm version patch -m "chore(release): %s"'
+        run: npm version patch -m "chore(release): %s"
       - name: Publish
         run: npm publish --access public
         env:

@@ -41,7 +41,7 @@ Environment variables:
 ## API Examples
 Create breakpoint (agent):
 ```bash
-curl -X POST http://localhost:3000/api/breakpoints \
+curl -X POST http://localhost:3185/api/breakpoints \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer $AGENT_TOKEN" \
   -d '{"agentId":"agent-1","title":"Need review","payload":{"summary":"check this"},"tags":["review"],"ttlSeconds":3600}'
@@ -49,12 +49,12 @@ curl -X POST http://localhost:3000/api/breakpoints \
 
 Check status:
 ```bash
-curl http://localhost:3000/api/breakpoints/<id>/status
+curl http://localhost:3185/api/breakpoints/<id>/status
 ```
 
 Release with feedback (human):
 ```bash
-curl -X POST http://localhost:3000/api/breakpoints/<id>/feedback \
+curl -X POST http://localhost:3185/api/breakpoints/<id>/feedback \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer $HUMAN_TOKEN" \
   -d '{"author":"reviewer","comment":"Looks good","release":true}'
@@ -83,7 +83,7 @@ Only allowlisted extensions are served, and the file must be listed in the
 breakpoint payload.
 
 ## Web UI
-Open `http://localhost:3000` and provide the human token in the UI.
+Open `http://localhost:3184` and provide the human token in the UI.
 
 ## Install the babysitter-breakpoint skill
 ```bash
