@@ -13,6 +13,7 @@ function defaultDbPath() {
 const DB_PATH = process.env.DB_PATH || defaultDbPath();
 
 function openDb() {
+  fs.mkdirSync(path.dirname(DB_PATH), { recursive: true });
   return new sqlite3.Database(DB_PATH);
 }
 
