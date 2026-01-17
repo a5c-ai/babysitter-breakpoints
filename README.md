@@ -27,6 +27,32 @@ npm run start:api
 npm run start:worker
 ```
 
+## CLI Examples
+Start the full system (API + web UI + worker):
+```bash
+breakpoints start
+```
+
+Create a breakpoint (agent):
+```bash
+breakpoints breakpoint create --question "Need approval?" --title "Approval"
+```
+
+Check status:
+```bash
+breakpoints breakpoint status <id>
+```
+
+Wait for release:
+```bash
+breakpoints breakpoint wait <id> --interval 3
+```
+
+Install the babysitter-breakpoint skill:
+```bash
+breakpoints install-skill --target codex --scope global
+```
+
 ## Configuration
 Environment variables:
 - `PORT` (default 3185)
