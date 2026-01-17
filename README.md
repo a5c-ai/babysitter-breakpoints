@@ -99,6 +99,8 @@ breakpoints install-skill --target cursor --scope local
 ```
 Global targets use `CODEX_HOME` or `~/.codex` for Codex, and `~/.claude` or `~/.cursor` for Claude/Cursor. Local installs write to `.codex/skills`, `.claude/skills`, or `.cursor/skills` under the repo root. Restart the app after install.
 
+When installed from npm, the skill is bundled at `.codex/skills/babysitter-breakpoint/` inside the package and copied to the target location by `breakpoints install-skill`.
+
 ## Breakpoint CLI (agent-friendly)
 Create a breakpoint:
 ```bash

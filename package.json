@@ -6,6 +6,13 @@
   "bin": {
     "breakpoints": "bin/breakpoints.js"
   },
+  "files": [
+    "bin/",
+    "api/",
+    "worker/",
+    "extensions/",
+    ".codex/skills/babysitter-breakpoint/"
+  ],
   "scripts": {
     "start:api": "node api/server.js",
     "start:worker": "node worker/worker.js",

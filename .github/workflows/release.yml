@@ -2,8 +2,8 @@ name: Release to npm
 
 on:
   push:
-    tags:
-      - "v*.*.*"
+    branches:
+      - main
 
 jobs:
   release:
@@ -20,7 +20,15 @@ jobs:
           registry-url: https://registry.npmjs.org/
       - name: Install dependencies
         run: npm install
+      - name: Configure git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+      - name: Bump version
+        run: npm version patch -m "chore(release): %s"
       - name: Publish
         run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Push version bump
+        run: git push --follow-tags
