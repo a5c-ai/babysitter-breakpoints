@@ -7,6 +7,7 @@ const fs = require("fs");
 
 function usage() {
   console.log(`Usage:
+  breakpoints start
   breakpoints run
   breakpoints install-skill [--source <path>] [--target codex|claude|cursor] [--scope local|global]
   breakpoints breakpoint create --question <text> [--run-id <id>] [--title <title>] [--agent-id <id>] [--tag <tag>] [--ttl <seconds>] [--file <path,format,language,label>]
@@ -21,6 +22,7 @@ function runCommand(command, args, options = {}) {
     stdio: "inherit",
     cwd: options.cwd || process.cwd(),
     shell: true,
+    env: options.env ? { ...process.env, ...options.env } : process.env,
   });
   proc.on("exit", (code) => {
     process.exitCode = code ?? 1;
@@ -150,7 +152,20 @@ async function breakpointWait(id, intervalSeconds) {
 function runSystem() {
   const repoRoot = path.join(__dirname, "..");
   const runner = path.join(repoRoot, "scripts", "dev-runner.js");
-  runCommand("node", [runner], { cwd: repoRoot });
+  const env = {
+    DB_PATH:
+      process.env.DB_PATH ||
+      path.join(
+        require("os").homedir(),
+        ".a5c",
+        "breakpoints",
+        "db",
+        "breakpoints.db"
+      ),
+    PORT: process.env.PORT || "3185",
+    WEB_PORT: process.env.WEB_PORT || "3184",
+  };
+  runCommand("node", [runner], { cwd: repoRoot, env });
 }
 
 function installSkill(sourcePath) {
@@ -216,7 +231,7 @@ if (!cmd || cmd === "--help" || cmd === "-h") {
   process.exit(0);
 }
 
-if (cmd === "run") {
+if (cmd === "start" || cmd === "run") {
   runSystem();
   return;
 }

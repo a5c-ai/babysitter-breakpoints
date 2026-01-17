@@ -2,11 +2,15 @@
 
 const fs = require("fs");
 const path = require("path");
+const os = require("os");
 const sqlite3 = require("sqlite3");
 
-const DB_PATH =
-  process.env.DB_PATH ||
-  path.join(__dirname, "..", "data", "breakpoints.db");
+function defaultDbPath() {
+  const home = os.homedir();
+  return path.join(home, ".a5c", "breakpoints", "db", "breakpoints.db");
+}
+
+const DB_PATH = process.env.DB_PATH || defaultDbPath();
 
 function openDb() {
   return new sqlite3.Database(DB_PATH);
@@ -42,6 +46,7 @@ function all(db, sql, params = []) {
 async function initDb(db) {
   const schemaPath = path.join(__dirname, "..", "db", "schema.sql");
   const schema = fs.readFileSync(schemaPath, "utf8");
+  fs.mkdirSync(path.dirname(DB_PATH), { recursive: true });
   await run(db, "PRAGMA foreign_keys = ON;");
   const statements = schema
     .split(";")

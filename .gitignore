@@ -2,3 +2,6 @@ node_modules/
 
 .a5c/
 .env
+data/breakpoints.db
+.codex/skills/babysitter/SKILL.md
+.codex/skills/babysitter-score/SKILL.md

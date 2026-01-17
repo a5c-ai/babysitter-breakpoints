@@ -18,7 +18,7 @@ npm run dev
 
 ## Run (installed CLI)
 ```bash
-breakpoints run
+breakpoints start
 ```
 
 Or run separately:
@@ -29,8 +29,9 @@ npm run start:worker
 
 ## Configuration
 Environment variables:
-- `PORT` (default 3000)
-- `DB_PATH` (default `data/breakpoints.db`)
+- `PORT` (default 3185)
+- `WEB_PORT` (default 3184)
+- `DB_PATH` (default `~/.a5c/breakpoints/db/breakpoints.db`)
 - `REPO_ROOT` (default repo root)
 - `AGENT_TOKEN` (optional)
 - `HUMAN_TOKEN` (optional)
